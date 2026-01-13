@@ -5,8 +5,7 @@ pipeline {
 
         stage('PULL') {
             steps {
-                git branch: 'devops',
-                    url: 'https://github.com/chetanraval07/jenkins-final26.git'
+               git 'https://github.com/chetanraval07/jenkins-final26.git'
             }
         }
 

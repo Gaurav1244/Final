@@ -46,7 +46,7 @@ pipeline {
 
         stage('DEPLOY') {
             steps {
-                sh 'kubectl apply -f simple-deploy/'
+                sh 'kubectl apply -f simple-deploy/*'
             }
         }
     }

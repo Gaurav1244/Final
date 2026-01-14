@@ -11,19 +11,17 @@ pipeline {
 
         stage('FRONTEND-DOCKER-BUILD') {
             steps {
-                sh '''
-                cd frontend
-                docker build -t gaurav262004/easy-frontend:latest .
-                '''
+                dir('frontend') {
+                    sh 'docker build -t gaurav262004/easy-frontend:latest .'
+                }
             }
         }
 
         stage('BACKEND-DOCKER-BUILD') {
             steps {
-                sh '''
-                cd backend
-                docker build -t gaurav262004/easy-backend:latest .
-                '''
+                dir('backend') {
+                    sh 'docker build -t gaurav262004/easy-backend:latest .'
+                }
             }
         }
 
@@ -34,8 +32,9 @@ pipeline {
                 docker push gaurav262004/easy-backend:latest
                 '''
             }
-	}
-            stage('DOCKER-CLEAN') {
+        }
+
+        stage('DOCKER-CLEAN') {
             steps {
                 sh '''
                 docker rmi -f gaurav262004/easy-frontend:latest
@@ -46,8 +45,10 @@ pipeline {
 
         stage('DEPLOY') {
             steps {
-                sh 'kubectl apply -f simple-deploy/'
+                // Use workspace path to the deployment folder
+                sh 'kubectl apply -f ${WORKSPACE}/simple-deploy/'
             }
         }
     }
 }
+

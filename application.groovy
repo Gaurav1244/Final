@@ -5,7 +5,7 @@ pipeline {
 
         stage('PULL') {
             steps {
-               git 'https://github.com/chetanraval07/jenkins-final26.git'
+               git 'https://github.com/Gaurav1244/cdec-batch21-2repo.git'
             }
         }
 
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                 cd frontend
-                docker build -t shivansh7310/easy-frontend:latest .
+                docker build -t gaurav262004/easy-frontend:latest .
                 '''
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh '''
                 cd backend
-                docker build -t shivansh7310/easy-backend:latest .
+                docker build -t gaurav262004/easy-backend:latest .
                 '''
             }
         }
@@ -30,16 +30,16 @@ pipeline {
         stage('DOCKER-PUSH') {
             steps {
                 sh '''
-                docker push shivansh7310/easy-frontend:latest
-                docker push shivansh7310/easy-backend:latest
+                docker push gaurav262004/easy-frontend:latest
+                docker push gaurav262004/easy-backend:latest
                 '''
             }
 	}
             stage('DOCKER-CLEAN') {
             steps {
                 sh '''
-                docker rmi -f shivansh7310/easy-frontend:latest
-                docker rmi -f shivansh7310/easy-backend:latest
+                docker rmi -f gaurav262004/easy-frontend:latest
+                docker rmi -f gaurav262004/easy-backend:latest
                 '''
             }
         }
